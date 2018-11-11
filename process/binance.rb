@@ -1,5 +1,3 @@
-require 'binance'
-
 module Process
   class Binance
     attr_reader :currencies, :currencies_usdt

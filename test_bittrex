@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require File.expand_path(File.join(__FILE__, %w(.. environment.rb)))
+
+bittrex = Process::Bittrex.new(
+  api_key: ENV['BITTREX_BALANCE_KEY'],
+  secret_key: ENV['BITTREX_BALANCE_SECRET'])
+
+bittrex.request!
+ap bittrex.currencies
+ap bittrex.currencies_usdt
+ap bittrex.currencies_usdt.values.sum

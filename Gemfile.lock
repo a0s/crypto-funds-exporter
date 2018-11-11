@@ -6,6 +6,8 @@ GEM
       faraday (~> 0.12)
       faraday_middleware (~> 0.12)
       faye-websocket (~> 0.10)
+    bittrex (0.0.6)
+      faraday (>= 0.9.0)
     coderay (1.1.2)
     eventmachine (1.2.7)
     faraday (0.15.3)
@@ -31,6 +33,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   binance
+  bittrex
   json
   pry
 

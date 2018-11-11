@@ -8,4 +8,8 @@ require 'pry'
 AwesomePrint.defaults = { sort_keys: true }
 AwesomePrint.pry!
 
+require 'binance'
 require 'process/binance'
+
+require 'bittrex'
+require 'process/bittrex'
