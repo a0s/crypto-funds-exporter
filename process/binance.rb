@@ -39,7 +39,9 @@ module Process
 
       @currencies_usdt = {}
       @currencies.each do |symbol, amount|
-        if (rate = pairs.dig('USDT', symbol))
+        if symbol == 'USDT'
+          @currencies_usdt[symbol] = amount
+        elsif (rate = pairs.dig('USDT', symbol))
           @currencies_usdt[symbol] = amount * rate
         elsif (rate1 = pairs.dig('BTC', symbol)) && (rate2 = pairs.dig('USDT', 'BTC'))
           @currencies_usdt[symbol] = amount * rate1 * rate2
