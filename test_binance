@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require File.expand_path(File.join(__FILE__, %w(.. environment.rb)))
+
+binance = Process::Binance.new(
+  api_key: ENV['BINANCE_BALANCE_KEY'],
+  secret_key: ENV['BINANCE_BALANCE_SECRET'])
+
+binance.request!
+ap binance.currencies
+ap binance.currencies_usdt
+ap binance.currencies_usdt.values.sum
