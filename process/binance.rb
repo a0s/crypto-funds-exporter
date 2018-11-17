@@ -18,7 +18,7 @@ module Process
       end
     end
 
-    def request!
+    def request
       @book_ticker = client.book_ticker
       @account_info = client.account_info
 
@@ -30,11 +30,11 @@ module Process
 
       pairs = {}
       @book_ticker.each do |h|
-        baseAsset = exchange_info[h['symbol']]['baseAsset']
-        quoteAsset = exchange_info[h['symbol']]['quoteAsset']
+        base_asset = exchange_info[h['symbol']]['baseAsset']
+        quote_asset = exchange_info[h['symbol']]['quoteAsset']
 
-        pairs[quoteAsset] ||= {}
-        pairs[quoteAsset][baseAsset] = h['askPrice'].to_d
+        pairs[quote_asset] ||= {}
+        pairs[quote_asset][base_asset] = h['askPrice'].to_d
       end
 
       @currencies_usdt = {}
@@ -49,6 +49,8 @@ module Process
           @currencies_usdt[symbol] = amount * rate1 * rate2
         elsif (rate1 = pairs.dig('BNB', symbol)) && (rate2 = pairs.dig('USDT', 'BNB'))
           @currencies_usdt[symbol] = amount * rate1 * rate2
+        else
+          puts "Binance: Unknown #{symbol}"
         end
       end
     end
