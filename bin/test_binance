@@ -5,7 +5,7 @@ binance = Process::Binance.new(
   api_key: ENV['BINANCE_BALANCE_KEY'],
   secret_key: ENV['BINANCE_BALANCE_SECRET'])
 
-binance.request!
+binance.request
 ap binance.currencies
 ap binance.currencies_usdt
 ap binance.currencies_usdt.values.sum

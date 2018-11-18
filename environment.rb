@@ -4,12 +4,15 @@ require 'bigdecimal'
 require 'bigdecimal/util'
 require 'awesome_print'
 require 'pry'
+require 'active_support/all'
+require 'thread'
+require 'thwait'
+require 'binance'
+require 'bittrex'
 
 AwesomePrint.defaults = { sort_keys: true }
 AwesomePrint.pry!
 
-require 'binance'
 require 'process/binance'
-
-require 'bittrex'
 require 'process/bittrex'
+require 'exporter'
