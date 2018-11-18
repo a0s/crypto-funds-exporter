@@ -29,10 +29,21 @@ GEM
     method_source (0.9.1)
     minitest (5.11.3)
     multipart-post (2.0.0)
+    mustermann (1.0.3)
     pry (0.12.0)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    puma (3.12.0)
+    rack (2.0.6)
+    rack-protection (2.0.4)
+      rack
+    sinatra (2.0.4)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.4)
+      tilt (~> 2.0)
     thread_safe (0.3.6)
+    tilt (2.0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     websocket-driver (0.7.0)
@@ -49,6 +60,8 @@ DEPENDENCIES
   bittrex
   json
   pry
+  puma
+  sinatra
 
 BUNDLED WITH
    1.16.6
