@@ -1,21 +1,15 @@
 class Exporter
   attr_reader :binance, :bittrex
 
-  def initialize(prefix: '')
+  def initialize(prefix: '', binance_key:, binance_secret:, bittrex_key:, bittrex_secret:)
     @prefix = prefix
 
-    if ENV.key?('BINANCE_BALANCE_KEY') && ENV.key?('BINANCE_BALANCE_SECRET')
-      @binance = Process::Binance.new(
-        api_key: ENV['BINANCE_BALANCE_KEY'],
-        secret_key: ENV['BINANCE_BALANCE_SECRET']
-      )
+    if binance_key && binance_secret
+      @binance = Process::Binance.new(api_key: binance_key, secret_key: binance_secret)
     end
 
-    if ENV.key?('BITTREX_BALANCE_KEY') && ENV.key?('BITTREX_BALANCE_SECRET')
-      @bittrex = Process::Bittrex.new(
-        api_key: ENV['BITTREX_BALANCE_KEY'],
-        secret_key: ENV['BITTREX_BALANCE_SECRET']
-      )
+    if bittrex_key && bittrex_secret
+      @bittrex = Process::Bittrex.new(api_key: bittrex_key, secret_key: bittrex_secret)
     end
   end
 

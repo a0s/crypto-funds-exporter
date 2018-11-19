@@ -9,10 +9,12 @@ require 'thread'
 require 'thwait'
 require 'binance'
 require 'bittrex'
-
-AwesomePrint.defaults = { sort_keys: true }
-AwesomePrint.pry!
+require 'sinatra'
 
 require 'process/binance'
 require 'process/bittrex'
-require 'exporter'
+require 'server/exporter'
+require 'server/web_server'
+
+AwesomePrint.defaults = { sort_keys: true }
+AwesomePrint.pry!

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require File.expand_path(File.join(__FILE__, %w(.. environment.rb)))
+require File.expand_path(File.join(__FILE__, %w(.. .. environment.rb)))
 
 bittrex = Process::Bittrex.new(
   api_key: ENV['BITTREX_BALANCE_KEY'],
