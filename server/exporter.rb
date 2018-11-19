@@ -13,10 +13,10 @@ class Exporter
     end
   end
 
-  def request
+  def request!
     threads = []
-    threads << Thread.new { @binance.request } if @binance
-    threads << Thread.new { @bittrex.request } if @bittrex
+    threads << Thread.new { @binance.request! } if @binance
+    threads << Thread.new { @bittrex.request! } if @bittrex
     ThreadsWait.all_waits(*threads) if threads.present?
   end
 
@@ -74,6 +74,6 @@ class Exporter
       result << "#{@prefix}funds_total_usdt{currency=\"#{currency}\"} #{amount}"
     end
 
-    result.join("\n")
+    result.join("\n") + "\n"
   end
 end

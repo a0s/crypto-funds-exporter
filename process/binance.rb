@@ -18,7 +18,7 @@ module Process
       end
     end
 
-    def request
+    def request!
       @book_ticker = client.book_ticker
       @account_info = client.account_info
 

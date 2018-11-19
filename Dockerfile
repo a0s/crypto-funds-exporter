@@ -16,3 +16,4 @@ RUN \
         /root/.bundle \
         /app/vendor/bundle/ruby/2.5.0/cache/*.gem
 
+CMD ["bundle", "exec", "ruby", "./server/web_server_runner.rb", "1>&2"]

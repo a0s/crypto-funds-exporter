@@ -9,7 +9,7 @@ module Process
       end
     end
 
-    def request
+    def request!
       @currencies = ::Bittrex::Wallet.all.select { |obj| obj.available.to_d > 0.0 }.inject({}) do |h, obj|
         h[obj.currency] = obj.available.to_d
         h

@@ -13,4 +13,10 @@ class WebServer < Sinatra::Base
   get '/ping' do
     halt 200, 'OK'
   end
+
+  get '/metrics' do
+    content_type 'text/plain'
+    self.class.exporter.request!
+    self.class.exporter.export
+  end
 end
