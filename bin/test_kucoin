@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require File.expand_path(File.join(__FILE__, %w(.. .. environment.rb)))
+
+kucoin = Process::Kucoin.new(
+  api_key: ENV['KUCOIN_BALANCE_KEY'],
+  secret_key: ENV['KUCOIN_BALANCE_SECRET'])
+
+kucoin.request!
+ap kucoin.currencies
+ap kucoin.currencies_usdt
+ap kucoin.currencies_usdt.values.sum

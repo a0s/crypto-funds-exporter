@@ -20,16 +20,22 @@ It is recommended to use only tokens with read-only permissions.
 Stock exchanges supported by crypto-funds-exporter: 
 
 * Bittrex
-    ```
-    CRYPTO_FUNDS_EXPORTER_BITTREX_KEY
-    CRYPTO_FUNDS_EXPORTER_BITTREX_SECRET
-    ```
+  ```
+  CRYPTO_FUNDS_EXPORTER_BITTREX_KEY
+  CRYPTO_FUNDS_EXPORTER_BITTREX_SECRET
+  ```
     
 * Binance
-    ```
-    CRYPTO_FUNDS_EXPORTER_BINANCE_KEY
-    CRYPTO_FUNDS_EXPORTER_BINANCE_SECRET
-    ```
+  ```
+  CRYPTO_FUNDS_EXPORTER_BINANCE_KEY
+  CRYPTO_FUNDS_EXPORTER_BINANCE_SECRET
+  ```
+
+* Kucoin
+  ```
+  CRYPTO_FUNDS_EXPORTER_KUCOIN_KEY
+  CRYPTO_FUNDS_EXPORTER_KUCOIN_SECRET
+  ```
     
 Start container with chosen stock exchanges
     
@@ -42,6 +48,8 @@ docker run \
     -e CRYPTO_FUNDS_EXPORTER_BITTREX_SECRET=... \
     -e CRYPTO_FUNDS_EXPORTER_BINANCE_KEY=... \
     -e CRYPTO_FUNDS_EXPORTER_BINANCE_SECRET=... \
+    -e CRYPTO_FUNDS_EXPORTER_KUCOIN_KEY=... \
+    -e CRYPTO_FUNDS_EXPORTER_KUCOIN_SECRET=... \
     --name crypto-funds-exporter \    
     crypto-funds-exporter
 ```

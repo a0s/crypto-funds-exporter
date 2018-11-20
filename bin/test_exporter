@@ -5,7 +5,9 @@ exporter = Exporter.new(
   binance_key: ENV['BINANCE_BALANCE_KEY'],
   binance_secret: ENV['BINANCE_BALANCE_SECRET'],
   bittrex_key: ENV['BITTREX_BALANCE_KEY'],
-  bittrex_secret: ENV['BITTREX_BALANCE_SECRET']
+  bittrex_secret: ENV['BITTREX_BALANCE_SECRET'],
+  kucoin_key: ENV['KUCOIN_BALANCE_KEY'],
+  kucoin_secret: ENV['KUCOIN_BALANCE_SECRET']
 )
 exporter.request!
 puts exporter.export

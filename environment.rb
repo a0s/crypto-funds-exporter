@@ -9,10 +9,12 @@ require 'thread'
 require 'thwait'
 require 'binance'
 require 'bittrex'
+require 'kucoin_ruby'
 require 'sinatra'
 
 require 'process/binance'
 require 'process/bittrex'
+require 'process/kucoin'
 require 'server/exporter'
 require 'server/web_server'
 
