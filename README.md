@@ -1,14 +1,14 @@
 # crypto-funds-exporter
 Allows to export your crypto stock exchange's funds into Prometheus
 
-![crypto-funds-exporter](https://user-images.githubusercontent.com/418868/48742187-ec4fa380-ec6e-11e8-8fe5-75f3d970e7c4.png)
+![crypto-funds-exporter](https://user-images.githubusercontent.com/418868/48798765-6ab35080-ed16-11e8-9d61-2c438fbfa5ab.png)
 
 ## Build and run Docker container from scratch
 
 ```bash
 git clone https://github.com/a0s/crypto-funds-exporter.git
 cd crypto-funds-exporter
-git checkout v0.0.1
+git checkout v0.0.2
 docker build --tag crypto-funds-exporter .
 ```
 
