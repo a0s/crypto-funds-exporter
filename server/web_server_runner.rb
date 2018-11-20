@@ -15,7 +15,9 @@ class WebServerRunner
         binance_key: ENV[ENV_PREFIX + 'BINANCE_KEY'],
         binance_secret: ENV[ENV_PREFIX + 'BINANCE_SECRET'],
         bittrex_key: ENV[ENV_PREFIX + 'BITTREX_KEY'],
-        bittrex_secret: ENV[ENV_PREFIX + 'BITTREX_SECRET'])
+        bittrex_secret: ENV[ENV_PREFIX + 'BITTREX_SECRET'],
+        kucoin_key: ENV[ENV_PREFIX + 'KUCOIN_KEY'],
+        kucoin_secret: ENV[ENV_PREFIX + 'KUCOIN_SECRET'])
     end
   end
 
