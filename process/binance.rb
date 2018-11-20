@@ -11,16 +11,12 @@ module Process
       @client ||= ::Binance::Client::REST.new(api_key: @api_key, secret_key: @secret_key)
     end
 
-    def exchange_info
-      @exchange_info ||= begin
-        exchange_info = client.exchange_info
-        exchange_info['symbols'].inject({}) { |h, arr| h[arr['symbol']] = arr; h }
-      end
-    end
-
     def request!
-      @book_ticker = client.book_ticker
-      @account_info = client.account_info
+      ThreadsWait.all_waits(
+        Thread.new { @book_ticker = client.book_ticker },
+        Thread.new { @account_info = client.account_info },
+        Thread.new { @exchange_info = client.exchange_info['symbols'].inject({}) { |h, arr| h[arr['symbol']] = arr; h } }
+      )
 
       @currencies =
         @account_info['balances']
@@ -30,8 +26,8 @@ module Process
 
       pairs = {}
       @book_ticker.each do |h|
-        base_asset = exchange_info[h['symbol']]['baseAsset']
-        quote_asset = exchange_info[h['symbol']]['quoteAsset']
+        base_asset = @exchange_info[h['symbol']]['baseAsset']
+        quote_asset = @exchange_info[h['symbol']]['quoteAsset']
 
         pairs[quote_asset] ||= {}
         pairs[quote_asset][base_asset] = h['askPrice'].to_d

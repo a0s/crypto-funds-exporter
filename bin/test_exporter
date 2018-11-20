@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require File.expand_path(File.join(__FILE__, %w(.. .. environment.rb)))
+
+exporter = Exporter.new(
+  binance_key: ENV['BINANCE_BALANCE_KEY'],
+  binance_secret: ENV['BINANCE_BALANCE_SECRET'],
+  bittrex_key: ENV['BITTREX_BALANCE_KEY'],
+  bittrex_secret: ENV['BITTREX_BALANCE_SECRET']
+)
+exporter.request!
+puts exporter.export
