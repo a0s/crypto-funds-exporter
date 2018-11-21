@@ -14,21 +14,17 @@ module Process
     def request!
       ThreadsWait.all_waits(
         Thread.new { @book_ticker = client.book_ticker },
-        Thread.new { @account_info = client.account_info },
-        Thread.new { @exchange_info = client.exchange_info['symbols'].inject({}) { |h, arr| h[arr['symbol']] = arr; h } }
+        Thread.new { @exchange_info = client.exchange_info['symbols'].inject({}) { |h, arr| h[arr['symbol']] = arr; h } },
+        Thread.new do
+          account_info = client.account_info
+          @currencies = account_info['balances'].map { |h| [h['asset'], h['free'].to_d] }.select { |_, free| free > 0.0 }.to_h
+        end
       )
-
-      @currencies =
-        @account_info['balances']
-          .map { |h| [h['asset'], h['free'].to_d] }
-          .select { |_, free| free > 0.0 }
-          .to_h
 
       pairs = {}
       @book_ticker.each do |h|
         base_asset = @exchange_info[h['symbol']]['baseAsset']
         quote_asset = @exchange_info[h['symbol']]['quoteAsset']
-
         pairs[quote_asset] ||= {}
         pairs[quote_asset][base_asset] = h['askPrice'].to_d
       end

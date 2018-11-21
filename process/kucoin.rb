@@ -11,17 +11,16 @@ module Process
 
     def request!
       ThreadsWait.all_waits(
-        Thread.new { @operations_balance = ::KucoinRuby::Operations.balance },
-        Thread.new { @currency_exanges = ::KucoinRuby::Currency.exanges }
+        Thread.new do
+          operation_balance = ::KucoinRuby::Operations.balance
+          @currencies = operation_balance['data'].select { |h| h['balance'] > 0.0 }.inject({}) do |h, hash|
+            key, value = hash.values_at('coinType', 'balance')
+            h[key] = value.to_d
+            h
+          end
+        end,
+        Thread.new { @pairs = ::KucoinRuby::Currency.exanges['data']['rates'] }
       )
-
-      @currencies = @operations_balance['data'].select { |h| h['balance'] > 0.0 }.inject({}) do |h, hash|
-        key, value = hash.values_at('coinType', 'balance')
-        h[key] = value.to_d
-        h
-      end
-
-      @pairs = @currency_exanges['data']['rates']
 
       @currencies_usdt = {}
       @currencies.each do |symbol, amount|
@@ -30,7 +29,7 @@ module Process
         elsif (rate1 = @pairs.dig(symbol, 'IDR')) && (rate2 = @pairs.dig('USDT', 'IDR'))
           @currencies_usdt[symbol] = amount * rate1 / rate2
         else
-          puts "Bittrex: Unknown #{symbol}"
+          puts "Kucoin: Unknown #{symbol}"
         end
       end
     end

@@ -12,13 +12,15 @@ module Process
     def request!
       ThreadsWait.all_waits(
         Thread.new do
-          @currencies = ::Bittrex::Wallet.all.select { |obj| obj.available.to_d > 0.0 }.inject({}) do |h, obj|
+          wallet_all = ::Bittrex::Wallet.all
+          @currencies = wallet_all.select { |obj| obj.available.to_d > 0.0 }.inject({}) do |h, obj|
             h[obj.currency] = obj.available.to_d
             h
           end
         end,
         Thread.new do
-          @pairs = ::Bittrex::Summary.all.inject({}) do |h, obj|
+          summary_all = ::Bittrex::Summary.all
+          @pairs = summary_all.inject({}) do |h, obj|
             quote_asset, base_asset = obj.name.split('-')
             h[quote_asset] ||= {}
             h[quote_asset][base_asset] = obj.ask.to_d
